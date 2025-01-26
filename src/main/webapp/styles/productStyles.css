@@ -1,0 +1,181 @@
+/* Base styles */
+:root {
+    --primary-color: #6366f1;
+    --primary-text: #1f2937;
+    --secondary-text: #6b7280;
+    --border-color: #e5e7eb;
+    --card-bg: #ffffff;
+    --hover-bg: #f9fafb;
+}
+
+body {
+    background-color: #f3f4f6;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.page-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+/* Stats Cards */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-title {
+    color: var(--secondary-text);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    color: var(--primary-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Main Content Card */
+.modern-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Search and Filters */
+.search-container {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-text);
+}
+
+.search-input {
+    padding-left: 2.5rem;
+    border-radius: 8px;
+}
+
+/* Table Styles */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    color: var(--secondary-text);
+    font-weight: 500;
+    padding: 1rem;
+    border-bottom-width: 1px;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+.table tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
+}
+
+.btn-icon {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Status Badges */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Modals */
+.modal-content {
+    border: none;
+    border-radius: 16px;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 1.5rem 1.5rem 0.75rem;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 0.75rem 1.5rem 1.5rem;
+}
+
+/* Form Controls */
+.form-control, .form-select {
+    border-radius: 8px;
+    padding: 0.625rem 1rem;
+    border-color: var(--border-color);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.form-label {
+    color: var(--primary-text);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Input Groups */
+.input-group-text {
+    background-color: var(--hover-bg);
+    border-color: var(--border-color);
+}
+
+/* Product Description */
+.product-description {
+    font-size: 0.875rem;
+    color: var(--secondary-text);
+    margin-top: 0.25rem;
+}
