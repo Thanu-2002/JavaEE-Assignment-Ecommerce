@@ -14,6 +14,7 @@ import java.sql.SQLException;
 public class MyListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        
         System.out.println("Context initialized");
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
