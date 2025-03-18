@@ -16,52 +16,77 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
+
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\s]{2,50}$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)$");
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9_]{4,20}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = null;
-
-        // Set response type to JSON
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
         JsonObject jsonResponse = new JsonObject();
 
         try {
-            // Get form data
-            String firstName = req.getParameter("firstName");
-            String lastName = req.getParameter("lastName");
-            String email = req.getParameter("email");
-            String username = req.getParameter("username");
+            String firstName = sanitizeInput(req.getParameter("firstName"));
+            String lastName = sanitizeInput(req.getParameter("lastName"));
+            String email = sanitizeInput(req.getParameter("email")).toLowerCase();
+            String username = sanitizeInput(req.getParameter("username"));
             String password = req.getParameter("password");
             String confirmPassword = req.getParameter("confirmPassword");
 
-            // Basic validation
-            if (password == null || !password.equals(confirmPassword)) {
+            JsonObject errors = new JsonObject();
+
+            if (!isValidName(firstName)) {
+                errors.addProperty("firstName", "Invalid first name (2-50 letters)");
+            }
+
+            if (!isValidName(lastName)) {
+                errors.addProperty("lastName", "Invalid last name (2-50 letters)");
+            }
+
+            if (!isValidEmail(email)) {
+                errors.addProperty("email", "Invalid email format");
+            }
+
+            if (!isValidUsername(username)) {
+                errors.addProperty("username", "4-20 chars (letters, numbers, underscores)");
+            }
+
+            if (!isValidPassword(password)) {
+                errors.addProperty("password", "8+ chars with uppercase, number, and special");
+            }
+
+            if (!password.equals(confirmPassword)) {
+                errors.addProperty("confirmPassword", "Passwords don't match");
+            }
+
+            if (errors.size() == 0) {
+                boolean userExists = (Long) session.createQuery(
+                                "SELECT COUNT(u) FROM User u WHERE LOWER(u.username) = :username OR LOWER(u.email) = :email")
+                        .setParameter("username", username.toLowerCase())
+                        .setParameter("email", email.toLowerCase())
+                        .uniqueResult() > 0;
+
+                if (userExists) {
+                    errors.addProperty("general", "Username or email already exists");
+                }
+            }
+
+            if (errors.size() > 0) {
                 jsonResponse.addProperty("status", "error");
-                jsonResponse.addProperty("message", "Passwords do not match!");
+                jsonResponse.add("errors", errors);
                 out.print(jsonResponse.toString());
                 return;
             }
 
-            // Check if user exists
-            Long existingUser = (Long) session.createQuery(
-                            "SELECT COUNT(u) FROM User u WHERE u.username = :username OR u.email = :email")
-                    .setParameter("username", username)
-                    .setParameter("email", email)
-                    .uniqueResult();
-
-            if (existingUser > 0) {
-                jsonResponse.addProperty("status", "error");
-                jsonResponse.addProperty("message", "Username or email already exists!");
-                out.print(jsonResponse.toString());
-                return;
-            }
-
-            // Create new user
             User user = new User();
             user.setFirstName(firstName);
             user.setLastName(lastName);
@@ -73,12 +98,10 @@ public class RegisterServlet extends HttpServlet {
             user.setOrders(new ArrayList<>());
             user.setCartItems(new ArrayList<>());
 
-            // Save user
             transaction = session.beginTransaction();
-            session.save(user);
+            session.persist(user);
             transaction.commit();
 
-            // Send success response
             jsonResponse.addProperty("status", "success");
             jsonResponse.addProperty("message", "Registration successful!");
             out.print(jsonResponse.toString());
@@ -87,16 +110,33 @@ public class RegisterServlet extends HttpServlet {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-
-            // Send error response
             jsonResponse.addProperty("status", "error");
-            jsonResponse.addProperty("message", "Registration failed: " + e.getMessage());
+            jsonResponse.addProperty("message", "Server error: " + e.getMessage());
             out.print(jsonResponse.toString());
-
         } finally {
             if (session != null) {
                 session.close();
             }
         }
+    }
+
+    private boolean isValidName(String name) {
+        return NAME_PATTERN.matcher(name).matches();
+    }
+
+    private boolean isValidEmail(String email) {
+        return EMAIL_PATTERN.matcher(email).matches();
+    }
+
+    private boolean isValidUsername(String username) {
+        return USERNAME_PATTERN.matcher(username).matches();
+    }
+
+    private boolean isValidPassword(String password) {
+        return PASSWORD_PATTERN.matcher(password).matches();
+    }
+
+    private String sanitizeInput(String input) {
+        return input != null ? input.trim().replaceAll("<", "&lt;").replaceAll(">", "&gt;") : "";
     }
 }

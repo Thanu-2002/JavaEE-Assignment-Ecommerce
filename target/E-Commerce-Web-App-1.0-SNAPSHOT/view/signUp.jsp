@@ -36,9 +36,9 @@
 
     <!-- Brand Logo -->
     <a href="../index.jsp" class="brand-logo">
-<%--        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">--%>
-<%--            <img src="../assets/a.svg" alt="logo" width="32" height="32">--%>
-<%--        </svg>--%>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <img src="../assets/logo/mylogo.png" alt="logo" width="32" height="32">
+        </svg>
         <span class="logo-text">Apex</span>
     </a>
 
@@ -125,11 +125,11 @@
     <div class="footer">
         <span>© Apex @ Copy Right Reserved</span>
         <span>help@apex.com</span>
-        <div class="dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
+<%--        <div class="dots">--%>
+<%--            <div class="dot active"></div>--%>
+<%--            <div class="dot"></div>--%>
+<%--            <div class="dot"></div>--%>
+<%--        </div>--%>
     </div>
 </div>
 

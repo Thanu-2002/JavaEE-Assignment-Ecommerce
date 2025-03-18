@@ -33,6 +33,9 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
+    @Column(name = "image_path", length = 255)
+    private String imagePath;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

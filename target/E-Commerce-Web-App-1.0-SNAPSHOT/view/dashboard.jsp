@@ -33,14 +33,14 @@
 <nav class="top-nav">
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center gap-4">
-<%--      <div class="window-dots">--%>
-<%--        <div class="window-dot dot-red"></div>--%>
-<%--        <div class="window-dot dot-yellow"></div>--%>
-<%--        <div class="window-dot dot-green"></div>--%>
-<%--      </div>--%>
+      <div class="window-dots">
+        <div class="window-dot dot-red"></div>
+        <div class="window-dot dot-yellow"></div>
+        <div class="window-dot dot-green"></div>
+      </div>
       <div>
 <%--        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">--%>
-<%--          <img src="../assets/a.svg" alt="logo" width="32" height="32">--%>
+<%--          <img src="" alt="logo" width="32" height="32">--%>
 <%--        </svg>--%>
         <span class="nav-logo">Apex</span>
       </div>
@@ -50,7 +50,7 @@
         <a href="categories.jsp" class="nav-link">Categories</a>
         <a href="orders.jsp" class="nav-link">Orders</a>
         <% if ("ADMIN".equals(role)) { %>
-        <a href="users.jsp" class="nav-link">Users</a>
+        <a href="user.jsp" class="nav-link">Users</a>
         <% } %>
       </div>
     </div>
@@ -177,59 +177,59 @@
               <i class="bi bi-currency-dollar text-warning"></i>
             </div>
             <div class="feature-title">Revenue</div>
-            <div class="feature-value">$10,635</div>
+            <div class="feature-value">$12,845</div>
             <div class="feature-description">+8% from last month</div>
           </div>
         </div>
 
-<%--        <!-- Quick Link Cards -->--%>
-<%--        <div class="col-12">--%>
-<%--          <div class="row g-4">--%>
-<%--            <div class="col-md-3">--%>
-<%--              <a href="products.jsp" class="text-decoration-none">--%>
-<%--                <div class="feature-card quick-link-card">--%>
-<%--                  <div class="d-flex flex-column align-items-center text-center">--%>
-<%--                    <div class="feature-icon mb-3">--%>
-<%--                      <i class="bi bi-box-seam fs-1 text-primary"></i>--%>
-<%--                    </div>--%>
-<%--                    <h5 class="mb-2">Products</h5>--%>
-<%--                    <p class="text-muted mb-0">Manage your product inventory</p>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </a>--%>
-<%--            </div>--%>
+        <!-- Quick Link Cards -->
+        <div class="col-12">
+          <div class="row g-4">
+            <div class="col-md-3">
+              <a href="products.jsp" class="text-decoration-none">
+                <div class="feature-card quick-link-card">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <div class="feature-icon mb-3">
+                      <i class="bi bi-box-seam fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="mb-2">Products</h5>
+                    <p class="text-muted mb-0">Manage your product inventory</p>
+                  </div>
+                </div>
+              </a>
+            </div>
 
-<%--            <div class="col-md-3">--%>
-<%--              <a href="categories.jsp" class="text-decoration-none">--%>
-<%--                <div class="feature-card quick-link-card">--%>
-<%--                  <div class="d-flex flex-column align-items-center text-center">--%>
-<%--                    <div class="feature-icon mb-3">--%>
-<%--                      <i class="bi bi-grid fs-1 text-success"></i>--%>
-<%--                    </div>--%>
-<%--                    <h5 class="mb-2">Categories</h5>--%>
-<%--                    <p class="text-muted mb-0">Organize your products</p>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </a>--%>
-<%--            </div>--%>
+            <div class="col-md-3">
+              <a href="categories.jsp" class="text-decoration-none">
+                <div class="feature-card quick-link-card">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <div class="feature-icon mb-3">
+                      <i class="bi bi-grid fs-1 text-success"></i>
+                    </div>
+                    <h5 class="mb-2">Categories</h5>
+                    <p class="text-muted mb-0">Organize your products</p>
+                  </div>
+                </div>
+              </a>
+            </div>
 
-<%--            <div class="col-md-3">--%>
-<%--              <a href="orders.jsp" class="text-decoration-none">--%>
-<%--                <div class="feature-card quick-link-card">--%>
-<%--                  <div class="d-flex flex-column align-items-center text-center">--%>
-<%--                    <div class="feature-icon mb-3">--%>
-<%--                      <i class="bi bi-cart-check fs-1 text-info"></i>--%>
-<%--                    </div>--%>
-<%--                    <h5 class="mb-2">Orders</h5>--%>
-<%--                    <p class="text-muted mb-0">Track customer orders</p>--%>
-<%--                  </div>--%>
-<%--                </div>--%>
-<%--              </a>--%>
-<%--            </div>--%>
+            <div class="col-md-3">
+              <a href="orders.jsp" class="text-decoration-none">
+                <div class="feature-card quick-link-card">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <div class="feature-icon mb-3">
+                      <i class="bi bi-cart-check fs-1 text-info"></i>
+                    </div>
+                    <h5 class="mb-2">Orders</h5>
+                    <p class="text-muted mb-0">Track customer orders</p>
+                  </div>
+                </div>
+              </a>
+            </div>
 
             <% if ("ADMIN".equals(role)) { %>
             <div class="col-md-3">
-                <a href="users.jsp" class="text-decoration-none">
+              <a href="user.jsp" class="text-decoration-none">
                 <div class="feature-card quick-link-card">
                   <div class="d-flex flex-column align-items-center text-center">
                     <div class="feature-icon mb-3">

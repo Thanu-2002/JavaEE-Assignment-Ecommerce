@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/loginStyles.css">
 </head>
+
 <body>
 <div class="app-container">
 <%--    <div class="window-controls">--%>
@@ -19,9 +20,9 @@
 <%--    </div>--%>
 
     <a href="#" class="brand-logo">
-<%--        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">--%>
-<%--            <img src="assets/a.svg" alt="logo" width="32" height="32">--%>
-<%--        </svg>--%>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <img src="assets/logo/mylogo.png" alt="logo" width="32" height="32">
+        </svg>
         <span class="logo-text">Apex</span>
     </a>
 
@@ -65,7 +66,7 @@
                     <div>
                         <div class="d-flex justify-content-between align-items-center">
                             <label class="input-label required">Password</label>
-                            <a href="view/forgotPassword.jsp" style="font-size: 14px; color: #2563EB; text-decoration: none;">Forgot password?</a>
+                            <a href="forgotPassword.jsp" style="font-size: 14px; color: #2563EB; text-decoration: none;">Forgot password?</a>
                         </div><br>
                         <input type="password" name="password" class="form-input" placeholder="••••••••" required>
                     </div>
@@ -80,7 +81,7 @@
 
                 <div class="text-center mt-4" style="font-size: 14px; color: #6B7280;">
                     Don't have an account?
-                    <a href="view/signUp.jsp" style="color: #2563EB; text-decoration: none; font-weight: 500;">Sign up</a>
+                    <a href="signUp.jsp" style="color: #2563EB; text-decoration: none; font-weight: 500;">Sign up</a>
                 </div>
             </form>
         </div>
@@ -88,7 +89,7 @@
 
     <div class="footer">
         <span>© Apex @ Copy Right Reserved</span>
-        <span>help@apex.com</span>
+        <span>help@Apex.com</span>
         <div class="dots">
             <div class="dot active"></div>
             <div class="dot"></div>
@@ -100,61 +101,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#loginForm').on('submit', function(e) {
-            e.preventDefault();
-
-            const loginBtn = $('#loginBtn');
-            const originalBtnText = loginBtn.html();
-            loginBtn.prop('disabled', true)
-                .html('<span class="spinner-border spinner-border-sm me-2"></span>Signing in...');
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                data: $(this).serialize(),
-                dataType: 'json',
-                success: function(response) {
-                    if (response.status === 'success') {
-                        $('.step-item').eq(1).addClass('step-active');
-                        setTimeout(function() {
-                            $('.step-item').eq(2).addClass('step-active');
-                            window.location.replace('view/' + response.redirect);
-                        }, 1000);
-                    }else {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: response.message,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                        loginBtn.prop('disabled', false).html(originalBtnText);
-                    }
-                },
-                error: function() {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Something went wrong. Please try again.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    loginBtn.prop('disabled', false).html(originalBtnText);
-                }
-            });
-        });
-    });
-</script>
-<script>
-    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_BACK_FORWARD) {
-        window.location.href = 'view/dashboard.jsp';
-    }
-
-    window.history.pushState(null, null, window.location.href);
-    window.onpopstate = function () {
-        window.history.go(1);
-    };
-</script>
+<script src="scripts/loginScripts.js"></script>
 </body>
 </html>
