@@ -211,7 +211,7 @@
             <i class="bi bi-star-fill text-warning"></i>
             <i class="bi bi-star-fill text-warning"></i>
           </div>
-          <p class="testimony mb-4">"The creativity and AI expertise from Automatix set a new benchmark for our industry. Highly recommended!"</p>
+          <p class="testimony mb-4">"The innovation and AI expertise from Automatix set a new benchmark for our industry. Highly recommended!"</p>
           <h5 class="client-name mb-1">Agus Blimbing</h5>
           <p class="client-position text-muted">Tech Manager</p>
         </div>

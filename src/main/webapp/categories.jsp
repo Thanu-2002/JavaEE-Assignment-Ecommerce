@@ -22,7 +22,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h1 class="m-0 mb-2">Categories</h1>
-                <p class="m-0 text-white-50">Search Your Essential Categories As You Need ❤️🫰</p>
+                <p class="m-0 text-white-50">Browse Your Key Categories As Required</p>
             </div>
         </div>
     </div>
